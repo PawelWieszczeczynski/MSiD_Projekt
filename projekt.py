@@ -3,6 +3,7 @@ import pandas
 from matplotlib import pyplot as plt
 import seaborn
 from scipy.optimize import curve_fit
+from sklearn.metrics import mean_squared_error, mean_absolute_error
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
 
@@ -47,14 +48,25 @@ def new_plot(x, y, xlabel, title, filename):
     seaborn.lineplot(x=X_axis, y=model_lin.predict(X_axis_reshaped), color="red")
     seaborn.lineplot(x=X_axis, y=model_custom.predict(X_axis_reshaped), color="orange")
 
+    print("MAE_lin: " + str(mean_absolute_error(Y_test, model_lin.predict(X_test))))
+    print("MAE_custom: " + str(mean_absolute_error(Y_test, model_custom.predict(X_test))))
+
+    print("MSE_lin: " + str(mean_squared_error(Y_test, model_lin.predict(X_test))))
+    print("MSE_custom: " + str(mean_squared_error(Y_test, model_custom.predict(X_test))))
+
     plt.title(title)
     plt.xlabel(xlabel)
     plt.ylabel("Ilość wypadków")
     plt.grid()
     plt.savefig("images/plots/" + filename)
 
+print("Ceny wódki")
 new_plot(df["wodka"], df["wypadki"], "Cena 0,5l wódki czystej 40% [zł]", "Wypadki na drogach a cena wódki", "wodka.png")
-# new_plot(df["wydatki_woj"], df["wypadki"], "Wydatki województw na transport i łączność [tys. zł]", "Wypadki na drogach a wydatki województw na transport", "woj.png")
-# new_plot(df["emisja"], df["wypadki"], "Emisja zanieczyszczeń pyłowych z zakładów szczególnie uciążliwych [ton rocznie]", "Wypadki na drogach a emisja zanieczyszczeń", "emisja.png")
-# new_plot(df["kurs_b"], df["wypadki"], 'Cena kursu samochodowego kat. "B" [zł]', "Wypadki na drogach a cena kursu kat. B", "kurs.png")
-# new_plot(df["osob_prod"], df["wypadki"], "Liczba osób w wieku produkcyjnym (M - 18-64 lat, K - 18-59 lat)", "Wypadki na drogach a liczba osón w wieku produkcyjnym", "ludzie.png")
+print("Wydatki województw")
+new_plot(df["wydatki_woj"], df["wypadki"], "Wydatki województw na transport i łączność [tys. zł]", "Wypadki na drogach a wydatki województw na transport", "woj.png")
+print("Emisja zanieczyszczeń")
+new_plot(df["emisja"], df["wypadki"], "Emisja zanieczyszczeń pyłowych z zakładów szczególnie uciążliwych [ton rocznie]", "Wypadki na drogach a emisja zanieczyszczeń", "emisja.png")
+print('Cena kursu kat. "B"')
+new_plot(df["kurs_b"], df["wypadki"], 'Cena kursu samochodowego kat. "B" [zł]', "Wypadki na drogach a cena kursu kat. B", "kurs.png")
+print("Liczba osób w wieku produkcyjnym")
+new_plot(df["osob_prod"], df["wypadki"], "Liczba osób w wieku produkcyjnym (M - 18-64 lat, K - 18-59 lat)", "Wypadki na drogach a liczba osón w wieku produkcyjnym", "ludzie.png")

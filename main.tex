@@ -39,7 +39,7 @@ Wielkość datasetu to 17 wierszy. Są to poszczególne dane z lat 2004 - 2020. 
 \end{enumerate}
 
 \section{Opis rozwiązania}
-Z Banku Danych Lokalnych eksportowano potrzebne dane do plików MS Excel, następnie dane zostały umieszczone w Data Frame z biblioteki Pandas. Następnie dla każdego z czynników stworzono wykresy pokazujące regresję liniową i kwadratową. Użyte zostały LinearRegresion z biblioteki sklearn, oraz model oparty na optimize.curve\_fit pokazany na laboratoriach.
+Z Banku Danych Lokalnych eksportowano potrzebne dane do plików MS Excel, następnie dane zostały umieszczone w Data Frame z biblioteki Pandas. Następnie dla każdego z czynników stworzono wykresy pokazujące regresję liniową i kwadratową. Użyte zostały LinearRegresion z biblioteki sklearn oraz model oparty na optimize.curve\_fit pokazany na laboratoriach. Uzyto również metod mean\_square\_error oraz mean\_absolute\_error z biblioteki sklearn, w celu obliczenia błędów regresji.
 
 
 \section{Rezultaty obliczeń}
@@ -57,7 +57,15 @@ Zbiór danych zostanie podzielony na dwie części: treningową i testową w sto
 \caption{Wypadki na drogach a cena wódki}
 \end{center}
 \end{figure}
-Jak można zauważyć na wykresie, wraz ze wzrostem cen wódki, znacznie maleje ilość wypadków na drogach (stromy wykres liniowy). Analizując regresję kwadratową, można również zauważyć, że ilość wypadków spada bardzo szybko kiedy ceny wódki rosną z niskich wartości. Kiedy wódka jest droga, wzrost ceny nie powoduje już tak dużego zmniejszenia wypadków na drogach. 
+\begin{figure}[h]
+\begin{center}
+\includegraphics[width=0.5\linewidth]{images/errors/wodka_errors.png}
+\caption{MAE i MSE cen wódki}
+\end{center}
+\end{figure}
+
+Jak można zauważyć na wykresie, wraz ze wzrostem cen wódki, znacznie maleje ilość wypadków na drogach (stromy wykres liniowy). Analizując regresję kwadratową, można również zauważyć, że ilość wypadków spada bardzo szybko, kiedy ceny wódki rosną z niskich wartości. Kiedy wódka jest droga, wzrost ceny nie powoduje już tak dużego zmniejszenia wypadków na drogach. Jeśli chodzi o Mean Absolute i Mean Square Error, to regresja liniowa wykazuje mniejsze błędy od regresji kwadratowej, co oznacza, że trafniej określa ona rzeczywistą zależność między ceną wódki a liczbą wypadków. Przewidywana przez regresję wartość średnio różni się o około 5400 wypadków.
+\pagebreak
 
 \subsubsection{Wydatki województw}
 \begin{figure}[h]
@@ -66,7 +74,14 @@ Jak można zauważyć na wykresie, wraz ze wzrostem cen wódki, znacznie maleje 
 \caption{Wypadki na drogach a wydatki województw na transport}
 \end{center}
 \end{figure}
-Ponownie, zwiększenie badanego czynnika znacząco redukuje ilość wypadków na drogach. Co ciekawe, regresja liniowa jak i kwadratowa wyglądają praktycznie tak samo, co oznacza, że już model liniowy, relatywnie dobrze opisuje zależność pomiędzy wypadkami a wydatkami województw
+\begin{figure}[h]
+\begin{center}
+\includegraphics[width=0.5\linewidth]{images/errors/woj_errors.png}
+\caption{MAE i MSE wydatków województw}
+\end{center}
+\end{figure}
+Ponownie, zwiększenie badanego czynnika znacząco redukuje ilość wypadków na drogach. Co ciekawe, regresja liniowa, jak i kwadratowa wyglądają praktycznie tak samo, co oznacza, że już model liniowy, relatywnie dobrze opisuje zależność pomiędzy wypadkami a wydatkami województw. Podobnie jest również w przypadku błędów, funkcja liniowa lepiej określa rzeczywistą zależność między wydatkami województw na transport a liczbą wypadków. Warto jednak zauważyć, że różnica pomiędzy błędami średniokwadratowymi jest dużo mniejsza, niż w przypadku cen wódki, co oznacza, że większość błędów jest do siebie podobna i nie ma błędów znacznie odbiegających od reszty. W przypadku cen wódki, prawdopodobnie jest trochę błędów małych i trochę błędów bardzo dużych, przez co MAE wyglądają podobnie jak tutaj, ale MSE są już dużo większe. Przewidywana przez regresję wartość średnio różni się o około 5000 wypadków.
+\pagebreak
 
 \subsubsection{Emisja zanieczyszczeń}
 \begin{figure}[h]
@@ -75,7 +90,14 @@ Ponownie, zwiększenie badanego czynnika znacząco redukuje ilość wypadków na
 \caption{Wypadki na drogach a emisja zanieczyszczeń}
 \end{center}
 \end{figure}
-W tym przypadku zależność jest odwrotna. Zwiększenie emisji zanieczyszczeń pyłowych w zakładach szczególnie uciążliwych zwiększa ilość wypadków na Polskich drogach. Dzięki regresji kwadratowej, można zauważyć że najszybciej liczba wypadków rośnie kiedy emisja zanieczyszczeń jest niska. Kiedy emisja jest wysoka, dodatkowe jej zwiększenie nie wpływa już tak mocno na ilość wypadków.
+\begin{figure}[h]
+\begin{center}
+\includegraphics[width=0.5\linewidth]{images/errors/emisja_errors.png}
+\caption{MAE i MSE emisji zanieczyszczeń}
+\end{center}
+\end{figure}
+W tym przypadku zależność jest odwrotna. Zwiększenie emisji zanieczyszczeń pyłowych w zakładach szczególnie uciążliwych zwiększa ilość wypadków na Polskich drogach. Dzięki regresji kwadratowej, można zauważyć, że najszybciej liczba wypadków rośnie, kiedy emisja zanieczyszczeń jest niska. Kiedy emisja jest wysoka, dodatkowe jej zwiększenie nie wpływa już tak mocno na ilość wypadków. W tym przypadku regresja kwadratowa jest zdecydowanie lepsza od regresji liniowej. Trafniej ocenia ona zależność, gdyż jej MAE jest prawie dwa razy mniejsze, a MSE prawie 4 razy mniejsze. Przewidywana przez regresję kwadratową wartość, średnio różni się o 2350 wypadków.
+\pagebreak
 
 \subsubsection{Cena kursu kat. "B"}
 \begin{figure}[h]
@@ -84,7 +106,14 @@ W tym przypadku zależność jest odwrotna. Zwiększenie emisji zanieczyszczeń 
 \caption{Wypadki na drogach a cena kursu kat. "B"}
 \end{center}
 \end{figure}
-Jak można zauważyć na wykresie, wraz ze wzrostem cen kursu kat. "B", zmniejsza się ilość wypadków na drogach. Jest to niezgodne z logiką, zatem warto wspomnieć, że analizowane są jedynie suche, wybiórcze dane, a w rzeczywistości, na ilość wypadków wpływa kombinacja bardzo wielu czynników. Jednak według regresji zarówno liniowej jak i kwadratowej, na zmniejszenie ilości wypadków wpływ może mieć zmniejszenie cen kursu kat. "B".
+\begin{figure}[h]
+\begin{center}
+\includegraphics[width=0.5\linewidth]{images/errors/kurs_errors.png}
+\caption{MAE i MSE cen kursu kat. "B"}
+\end{center}
+\end{figure}
+Jak można zauważyć na wykresie, wraz ze wzrostem cen kursu kat. "B", zmniejsza się ilość wypadków na drogach. Wykres regresji kwadratowej znacznie różni się od regresji liniowej i pokazuje że zmiany bliżej początku wykresu mają większe znaczenie niż zmiany przy wyższych wartościach. Błędy regresji kwadratowej są jednak znacznie większe niż błędy regresji liniowej, co oznacza, że dużo gorzej określa ona zależność pomiędzy ceną kursu kat. "B" a liczbą wypadków. Przewidywana przez regresję liniową wartość, średnio różni się o około 3000 wypadków.
+\pagebreak
 
 \subsubsection{Liczba osób w wieku produkcyjnym}
 \begin{figure}[h]
@@ -93,20 +122,27 @@ Jak można zauważyć na wykresie, wraz ze wzrostem cen kursu kat. "B", zmniejsz
 \caption{Wypadki na drogach a liczba osób w wieku produkcyjnym}
 \end{center}
 \end{figure}
-Jak pokazuje ostatni wykres, wraz ze wzrostem liczby osób w wieku produkcyjnym, rośnie również liczba wypadków. Ponownie, wykres regresji kwadratowej jest niemalże taki sam jak regresji liniowej.
+\begin{figure}[h]
+\begin{center}
+\includegraphics[width=0.5\linewidth]{images/errors/ludzie_errors.png}
+\caption{MAE i MSE liczby osób w wieku produkcyjnym}
+\end{center}
+\end{figure}
+Jak pokazuje ostatni wykres, wraz ze wzrostem liczby osób w wieku produkcyjnym, rośnie również liczba wypadków. Ponownie, wykres regresji kwadratowej jest niemalże taki sam jak regresji liniowej. Zarówno MAE, jak i MSE w tym przypadku są bardzo do siebie zbliżone, na co wpływ ma na pewno bardzo duże podobieństwo pomiędzy liniami regresji obu metod. Minimalnie lepsza okazuje się regresja kwadratowa. Przewidywana przez regresję wartość średnio różni się o około 6500 wypadków.
+\pagebreak
 
 \section{Wnioski}
-Pokazane na wykresach zależności pokazują, że liczbę wypadków można skojarzyć z wieloma czynnikami. Zazwyczaj najwiekszy wpływ mają zmiany przy danych które są relatywnie niższe od reszty danych. Większość z przeanalizowanych zależności ma sens. 
+Pokazane na wykresach zależności pokazują, że liczbę wypadków można skojarzyć z wieloma czynnikami. Zazwyczaj największe zmiany zachodzą na początku wykresu, przy relatywnie niskich wartościach. Analizowane zależności są również zgodne z logiką, i można określić ich prawdopodobną przyczynę.
 
-Jeśli chodzi o cenę wódki, to jej wzrost może znacząco wpływać na zmniejszenie liczby wypadków, przez to, że w Polsce jest duży problem z kierowaniem pod wpływem alkoholu. Wyższe ceny sprawiają, że mniej wódki jest kupowane, a co za tym idzie być może mniej osób kieruje po pijaku.
+Jeśli chodzi o cenę wódki, to jej wzrost może znacząco wpływać na zmniejszenie liczby wypadków, przez to, że w Polsce jest duży problem z kierowaniem pod wpływem alkoholu. Wyższe ceny sprawiają, że mniej wódki jest kupowane, a co za tym idzie, być może mniej osób kieruje po pijaku.
 
-W przypadku liczby osób w wieku produkcyjnym, to liczba ta bezpośrednio przekłada się na liczbę samochodów na drogach. Więcej ludzi dojeżdząjących do pracy - więcej samochodów, więcej samochodów - więcej wypadków.
+W przypadku liczby osób w wieku produkcyjnym liczba ta bezpośrednio przekłada się na liczbę samochodów na drogach. Więcej ludzi dojeżdżających do pracy — więcej samochodów, więcej samochodów — więcej wypadków.
 
-Wydatki województw na transport i łączność bezpośrednio wpływają na insfrastrukturę drogową w Polsce, co przekłada się na bezpieczeństwo i mniejsze szanse na zdażenie się wypadku.
+Wydatki województw na transport i łączność bezpośrednio wpływają na infrastrukturę drogową w Polsce, co przekłada się na bezpieczeństwo i mniejsze szanse na zdarzenie się wypadku.
+
+Zwiększenie cen kursu kat. "B" prawdopodobnie zmniejsza ilość kierowców na drogach. Część osób może nie być skłonna zapłacić większej ceny za kurs, a w efekcie mogą oni podjąć decyzję o niezdawaniu prawa jazdy. Być może również większe ceny kursu przekładają się na lepszą jakość nauczania, co zwiększa umiejętności kierowców na drogach. Oba te czynniki zmniejszają ilość wypadków na drogach.
 
 Negatywnie z kolei wpływa zwiększenie emisji zanieczyszczeń pyłowych. Również to jest prawdopodobne, gdyż ilość zanieczyszczeń pyłowych może ograniczać widoczność, co zmniejsza bezpieczeństwo na drogach i może zwiększyć szanse na wypadek.
-
-Nielogiczne są natomiast wnioski z analizy cen kursu kat. "B" i ilości wypadków na drogach. Jak się okazuje, im droższy jest owy kurs, tym mniej wypadków na drogach. Skoro jest on droższy, to zwiększa się szansa, że ludzi nie będzie stać na owy kurs, a co za tym idzie, mogą oni być skłonni do kierowania samochodem bez odpowiednich umiejętności, powodując tym samym więcej wypadków. Być może jednak zwiększenie cen, zmniejsza samą ilość kierowców, gdyż nie chcą oni wydawać tak dużej ilości pieniędzy na próbę zdania egzaminu na prawo jazdy.
 
 Przedstawiona analiza może pozytywnie wpłynąć na zmniejszenie ilości wypadków na drogach. Przykładowo zarządy województw mogą przeznaczać więcej pieniędzy na transport i łączność, gdyż lepsza infrastruktura może zwiększyć bezpieczeństwo na drogach. Analogicznie, kiedy podniesione zostaną ceny wódki, jest bardzo duża szansa na to, że wraz z konsumpcją wódki, zmniejszy się również ilość wypadków. Model ten jest jednak dużym uproszczeniem i w rzeczywistości na liczbę wypadków drogowych ma wpływ jeszcze wiele innych czynników. 
 
